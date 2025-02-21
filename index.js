@@ -18,9 +18,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true})); 
 app.use(cookieParser());
 const corsOptions = {
-    origin: "*", // for all frontend 
-    credentials:true
-}
+    origin: (origin, callback) => {
+        callback(null, true); // Sabhi origins allow honge
+    },
+    credentials: true, // Cookies aur authentication allow karne ke liye
+    methods: "GET,POST,PUT,DELETE",
+    
+};
 
 app.use(cors(corsOptions));
 
