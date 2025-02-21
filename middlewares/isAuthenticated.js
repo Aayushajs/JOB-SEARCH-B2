@@ -1,6 +1,4 @@
 import jwt from "jsonwebtoken";
-config({ path: "./config/config.env" });
-import { config } from "dotenv";
 
 const isAuthenticated = async (req, res, next) => {
     try {

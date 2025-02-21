@@ -94,7 +94,12 @@ export const login = async (req, res) => {
             profile: user.profile
         }
 
-        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({
+        return res.status(200).cookie("token", token, {
+              maxAge: 1 * 24 * 60 * 60 * 1000,
+              httpOnly: true, // Set httpOnly to true to prevent XSS attacks
+              sameSite: 'None', // Set sameSite to None to allow third-party cookies
+              secure: true,  // Set secure to true if using HTTPS
+             }).json({
             message: `Welcome back ${user.fullname}`,
             user,
             success: true
