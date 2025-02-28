@@ -19,11 +19,13 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
     origin: (origin, callback) => {
-        callback(null, true); // Sabhi origins allow honge
+        callback(null, true); // Allows all origins dynamically
     },
-    credentials: true, // Cookies aur authentication allow karne ke liye
-    methods: "GET,POST,PUT,DELETE",
-    
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+    credentials: true, // Allow cookies & authentication headers
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));
